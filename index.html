@@ -289,24 +289,24 @@ const questions = [
     ]
   },
   {
-    title:"회의 중 갑자기 축제 부스 아이디어가 떠올랐다! 나는?",
+    title:"갑자기 축제 부스 아이디어가 떠올랐다! 나는?",
     choices:[
       {text:"A. 바로 말하면서 팀 반응을 확인해봄", type:"visionary"},
       {text:"B. 우선 혼자 정리해보고 적당한 타이밍에 말함", type:"obsessive"}
     ]
   },
   {
-    title:"축제 운영 계획서 제출 3시간 전! 나는?",
+    title:"축제 운영 계획서 제출까지 남은 시간은 3시간! 나는?",
     choices:[
       {text:"A. 일단 시작하고 하면서 방향 잡음", type:"hustler"},
       {text:"B. 일정과 구조부터 짜고 차근차근 작성함", type:"strategist"}
     ]
   },
   {
-    title:"다같이 모인 첫 전체 회의! 분위기 잡는 중요한 순간, 나는?",
+    title:"축제 준비 회의에서, 내 역할은?",
     choices:[
       {text:"A. 모두 의견 듣고 조율하는 분위기 메이커", type:"connector"},
-      {text:"B. 새로운 방향을 먼저 제안하며 분위기를 리드함", type:"visionary"}
+      {text:"B. 새로운 방향을 먼저 제안해 회의를 이끄는 리더", type:"visionary"}
     ]
   },
   {
@@ -351,7 +351,8 @@ function intro(){
   screen.innerHTML=`
     <div class="logo">STARTUP TEST</div>
     <div class="q-no">시작해볼까요?</div>
-    <div class="q-title">학교 생활 속 선택을 통해<br>나의 창업 성향 체크해보기!</div>
+    <div class="q-title">오늘은 축제 준비 날!<br>아침 준비부터 팀 프로젝트, 회의, 목표 도전까지<br>학교 생활 속 다양한 순간에서 나의 선택을 해보세요.<br>작은 선택들이 모여
+내가 어떤 창업가 유형인지 알려줍니다.</div>
     <small style="text-align:center;color:var(--muted)">선택하면 바로 다음 문항으로 넘어가요</small>
     <div class="choices">
       <button class="choice" onclick="start()">바로 시작할게요</button>
@@ -467,6 +468,7 @@ intro();
 
 </body>
 </html>
+
 
 
 
