@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>학교 창업가 유형 테스트</title>
+  <title>창업가 유형 테스트</title>
 
   <!-- 부드럽고 깔끔한 SUIT 폰트 -->
   <link href="https://cdn.jsdelivr.net/npm/suit-font@1.0.0/suit.min.css" rel="stylesheet">
@@ -251,9 +251,8 @@ const TYPES = {
     desc:["사람들과 쉽게 어울리고 분위기 잘 맞춤","협업 조율을 잘함","팀의 중심을 잡아주는 역할"]}
 };
 
-/* ✅ 재배치된 10문항 (Hustler도 1등 가능하도록 밸런스 보정) */
+/* 재배치된 10문항 */
 const questions = [
-  // Q1 Hustler vs Obsessive
   {
     title:"아침에 학교 도착했는데 배가 고픔. 선택한다면?",
     choices:[
@@ -261,8 +260,6 @@ const questions = [
       {text:"B. 밥으로 든든하게 먹고 시작함", type:"obsessive"}
     ]
   },
-
-  // Q2 Visionary vs Strategist
   {
     title:"신상 과자가 나왔다면 나는",
     choices:[
@@ -270,8 +267,6 @@ const questions = [
       {text:"B. 익숙한 과자를 선택함", type:"strategist"}
     ]
   },
-
-  // Q3 Hustler vs Strategist
   {
     title:"놀이공원에서 첫 코스 선택",
     choices:[
@@ -279,8 +274,6 @@ const questions = [
       {text:"B. 관람차에서 천천히 시작함", type:"strategist"}
     ]
   },
-
-  // Q4 Connector vs Obsessive
   {
     title:"팀 프로젝트 시작할 때",
     choices:[
@@ -288,8 +281,6 @@ const questions = [
       {text:"B. 혼자 하는 게 더 편함", type:"obsessive"}
     ]
   },
-
-  // Q5 Strategist vs Connector
   {
     title:"단톡 메시지 답장 스타일",
     choices:[
@@ -297,8 +288,6 @@ const questions = [
       {text:"B. 내 템포대로 나중에 답함", type:"strategist"}
     ]
   },
-
-  // Q6 Visionary vs Obsessive
   {
     title:"새 프로젝트 아이디어가 생겼을 때",
     choices:[
@@ -306,8 +295,6 @@ const questions = [
       {text:"B. 먼저 혼자 정리해본 뒤 이야기함", type:"obsessive"}
     ]
   },
-
-  // Q7 Hustler vs Strategist
   {
     title:"과제 마감이 다가왔을 때 나는",
     choices:[
@@ -315,8 +302,6 @@ const questions = [
       {text:"B. 계획부터 짜고 단계별로 진행함", type:"strategist"}
     ]
   },
-
-  // Q8 Connector vs Visionary
   {
     title:"모둠 활동 첫 회의에서 나는",
     choices:[
@@ -324,8 +309,6 @@ const questions = [
       {text:"B. 새로운 방향을 먼저 제안함", type:"visionary"}
     ]
   },
-
-  // Q9 Obsessive vs Connector
   {
     title:"시험 공부할 때 더 가까운 스타일은",
     choices:[
@@ -333,8 +316,6 @@ const questions = [
       {text:"B. 친구들이랑 문제 풀며 같이 공부함", type:"connector"}
     ]
   },
-
-  // Q10 Strategist vs Hustler (마지막이라 타이브레이크 영향 고려)
   {
     title:"새로운 목표가 생겼을 때 나는",
     choices:[
@@ -344,23 +325,27 @@ const questions = [
   }
 ];
 
-let idx=0;
-let scores={obsessive:0,visionary:0,hustler:0,strategist:0,connector:0};
-let history=[];
+let idx = 0;
+let scores = {obsessive:0, visionary:0, hustler:0, strategist:0, connector:0};
+let history = [];
 
-const screen=document.getElementById("screen");
-const bar=document.getElementById("bar");
-const count=document.getElementById("count");
-const backBtn=document.getElementById("backBtn");
+const screen = document.getElementById("screen");
+const bar = document.getElementById("bar");
+const count = document.getElementById("count");
+const backBtn = document.getElementById("backBtn");
+
+/* ✅ 완전 초기화 함수 */
+function resetAll(){
+  idx = 0;
+  scores = {obsessive:0, visionary:0, hustler:0, strategist:0, connector:0};
+  history = [];
+  bar.style.width = "0%";
+  count.textContent = `0/${questions.length}`;
+}
 
 /* 시작 화면 */
 function intro(){
-  idx=0;
-  scores={obsessive:0,visionary:0,hustler:0,strategist:0,connector:0};
-  history=[];
-  bar.style.width="0%";
-  count.textContent=`0/${questions.length}`;
-
+  resetAll();
   screen.innerHTML=`
     <div class="logo">STARTUP TEST</div>
     <div class="q-no">시작해볼까요?</div>
@@ -374,14 +359,13 @@ function intro(){
 
 /* 문항 시작 */
 function start(){
-  idx=0;
-  history=[];
+  resetAll();            // ✅ 여기서도 완전 초기화
   renderQuestion();
   updateProgress();
 }
 
 function renderQuestion(){
-  const q=questions[idx];
+  const q = questions[idx];
   screen.innerHTML=`
     <div class="logo">SPARTA STYLE</div>
     <div class="q-no">Q${idx+1}</div>
