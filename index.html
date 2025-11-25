@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>학교 창업가 유형 테스트</title>
+
+  <!-- 부드럽고 깔끔한 SUIT 폰트 -->
+  <link href="https://cdn.jsdelivr.net/npm/suit-font@1.0.0/suit.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --sky-50:#f5fbff; --sky-100:#e8f6ff;
+      --sky-200:#cfeeff; --sky-300:#a9e1ff;
+      --sky-400:#74cfff; --sky-500:#3fb9ff;
+      --sky-600:#169ee9;
+      --navy:#0b1b33; --muted:#6b7a90;
+      --white:#ffffff;
+      --radius:16px;
+      --shadow:0 8px 20px rgba(6,75,140,0.08);
+    }
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      padding:12px;
+      font-family:"SUIT","Noto Sans KR",sans-serif;
+      background:linear-gradient(180deg,var(--sky-50),var(--sky-100));
+      color:var(--navy);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+    }
+
+    .app{
+      width:min(720px,100%);
+      display:grid;
+      gap:12px;
+    }
+
+    /* 상단 진행 영역 슬림 */
+    .top{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:transparent;
+      padding:0;
+    }
+
+    .back{
+      width:30px;height:30px;
+      border-radius:999px;
+      border:1px solid var(--sky-200);
+      background:var(--white);
+      font-size:18px;
+      color:var(--navy);
+      cursor:pointer;
+      display:grid;place-items:center;
+      transition:.15s;
+    }
+    .back:hover{ background:var(--sky-50); transform:translateY(-1px); }
+
+    .progress-wrap{
+      flex:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:var(--white);
+      border:1px solid var(--sky-200);
+      border-radius:12px;
+      padding:10px 12px;
+      box-shadow:var(--shadow);
+    }
+
+    .progress{
+      flex:1;
+      height:6px;
+      background:var(--sky-100);
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .progress .bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--sky-500),var(--sky-600));
+      transition:width .25s ease;
+    }
+
+    .count{
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+      min-width:42px;
+      text-align:right;
+    }
+
+    /* 카드 */
+    .card{
+      background:var(--white);
+      border:1px solid var(--sky-200);
+      border-radius:16px;
+      padding:20px;
+      display:grid;
+      gap:14px;
+      box-shadow:var(--shadow);
+      min-height:calc(100dvh - 110px);
+    }
+
+    .logo{
+      text-align:center;
+      font-weight:900;
+      font-size:13px;
+      color:var(--sky-600);
+    }
+
+    .q-no{
+      text-align:center;
+      font-size:24px;
+      font-weight:900;
+      color:var(--sky-600);
+    }
+
+    .q-title{
+      text-align:center;
+      font-size:19px;
+      font-weight:800;
+      line-height:1.6;
+    }
+
+    .q-step{
+      text-align:center;
+      font-size:12px;
+      font-weight:700;
+      color:var(--muted);
+      margin-top:-6px;
+    }
+
+    .choices{
+      display:grid;
+      gap:10px;
+      margin-top:4px;
+    }
+    .choice{
+      width:100%;
+      padding:14px 16px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:800;
+      color:white;
+      background:linear-gradient(180deg,var(--sky-500),var(--sky-600));
+      box-shadow:0 6px 14px rgba(22,158,233,0.18);
+      transition:.15s;
+    }
+    .choice:hover{ transform:translateY(-2px); filter:saturate(1.04); }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      margin-top:auto;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid var(--sky-200);
+      background:var(--sky-100);
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.15s;
+      font-family:"SUIT";
+    }
+    .btn:hover{ background:var(--sky-200); }
+    .btn.primary{
+      background:linear-gradient(90deg,var(--sky-500),var(--sky-600));
+      color:white;
+      border:none;
+    }
+
+    .result-emoji{ font-size:56px; text-align:center; }
+    .result-title{ text-align:center; font-size:22px; font-weight:900; }
+    .result-one{ text-align:center; font-size:14px; font-weight:900; color:var(--sky-600); }
+
+    .result-box{
+      background:var(--sky-50);
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--sky-200);
+      display:grid; gap:6px;
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    .meter{ display:grid; gap:8px; }
+    .meter-row{
+      display:grid;
+      grid-template-columns:120px 1fr 30px;
+      align-items:center;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .meter-bar{
+      height:8px;
+      background:var(--sky-100);
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .meter-fill{
+      height:100%;
+      background:linear-gradient(90deg,var(--sky-400),var(--sky-600));
+    }
+
+    @media(max-width:520px){
+      body{ padding:10px; }
+      .card{ padding:16px; min-height:calc(100dvh - 100px); }
+      .choice{ font-size:15px; padding:12px; }
+      .q-title{ font-size:18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="top">
+      <button class="back" id="backBtn">‹</button>
+      <div class="progress-wrap">
+        <div class="progress"><div class="bar" id="bar"></div></div>
+        <div class="count" id="count">0/10</div>
+      </div>
+    </div>
+
+    <main class="card" id="screen"></main>
+
+  </div>
+
+<script>
+/* 유형 데이터 */
+const TYPES = {
+  obsessive:{name:"집요한 전문가형",en:"The Obsessive",emoji:"🔎",one:"포텐 무한 집중형",
+    desc:["한 번 목표를 정하면 끝까지 파고드는 편임","디테일과 완성도를 꼼꼼히 챙기는 편임","팀에서 핵심 기술이나 품질을 맡으면 강점 발휘"]},
+  visionary:{name:"미래를 그리는 리더형",en:"The Visionary",emoji:"💡",one:"아이디어 반짝형",
+    desc:["큰 그림과 새로운 콘셉트를 잘 떠올리는 편임","새로운 방향을 제안하는 편임","팀의 비전과 흐름을 잡을 때 강점 발휘"]},
+  hustler:{name:"행동하는 실천가형",en:"The Hustler",emoji:"🔥",one:"실행력 든든형",
+    desc:["생각보다 행동이 먼저 나오는 편임","부딪히며 배우는 스타일임","팀의 실행력을 끌어올리는 역할"]},
+  strategist:{name:"데이터 중심 전략가형",en:"The Strategist",emoji:"📊",one:"전략 똑똑형",
+    desc:["계획적으로 움직이는 편임","근거와 데이터를 챙기는 스타일","운영 로드맵을 맡으면 안정적임"]},
+  connector:{name:"네트워크형 조정자",en:"The Connector",emoji:"🤝",one:"소통 따뜻형",
+    desc:["사람들과 쉽게 어울리고 분위기 잘 맞춤","협업 조율을 잘함","팀의 중심을 잡아주는 역할"]}
+};
+
+/* ✅ 재배치된 10문항 (Hustler도 1등 가능하도록 밸런스 보정) */
+const questions = [
+  // Q1 Hustler vs Obsessive
+  {
+    title:"아침에 학교 도착했는데 배가 고픔. 선택한다면?",
+    choices:[
+      {text:"A. 라면으로 바로 해결함", type:"hustler"},
+      {text:"B. 밥으로 든든하게 먹고 시작함", type:"obsessive"}
+    ]
+  },
+
+  // Q2 Visionary vs Strategist
+  {
+    title:"신상 과자가 나왔다면 나는",
+    choices:[
+      {text:"A. 일단 사서 먹어봄", type:"visionary"},
+      {text:"B. 익숙한 과자를 선택함", type:"strategist"}
+    ]
+  },
+
+  // Q3 Hustler vs Strategist
+  {
+    title:"놀이공원에서 첫 코스 선택",
+    choices:[
+      {text:"A. 롤러코스터 타고 시작함", type:"hustler"},
+      {text:"B. 관람차에서 천천히 시작함", type:"strategist"}
+    ]
+  },
+
+  // Q4 Connector vs Obsessive
+  {
+    title:"팀 프로젝트 시작할 때",
+    choices:[
+      {text:"A. 같이 하는 게 편함", type:"connector"},
+      {text:"B. 혼자 하는 게 더 편함", type:"obsessive"}
+    ]
+  },
+
+  // Q5 Strategist vs Connector
+  {
+    title:"단톡 메시지 답장 스타일",
+    choices:[
+      {text:"A. 바로 답장함", type:"connector"},
+      {text:"B. 내 템포대로 나중에 답함", type:"strategist"}
+    ]
+  },
+
+  // Q6 Visionary vs Obsessive
+  {
+    title:"새 프로젝트 아이디어가 생겼을 때",
+    choices:[
+      {text:"A. 떠오른 대로 바로 이야기함", type:"visionary"},
+      {text:"B. 먼저 혼자 정리해본 뒤 이야기함", type:"obsessive"}
+    ]
+  },
+
+  // Q7 Hustler vs Strategist
+  {
+    title:"과제 마감이 다가왔을 때 나는",
+    choices:[
+      {text:"A. 일단 시작하고 하면서 채워감", type:"hustler"},
+      {text:"B. 계획부터 짜고 단계별로 진행함", type:"strategist"}
+    ]
+  },
+
+  // Q8 Connector vs Visionary
+  {
+    title:"모둠 활동 첫 회의에서 나는",
+    choices:[
+      {text:"A. 모두 의견 듣고 조율하려 함", type:"connector"},
+      {text:"B. 새로운 방향을 먼저 제안함", type:"visionary"}
+    ]
+  },
+
+  // Q9 Obsessive vs Connector
+  {
+    title:"시험 공부할 때 더 가까운 스타일은",
+    choices:[
+      {text:"A. 한 분야 깊게 파는 몰입형", type:"obsessive"},
+      {text:"B. 친구들이랑 문제 풀며 같이 공부함", type:"connector"}
+    ]
+  },
+
+  // Q10 Strategist vs Hustler (마지막이라 타이브레이크 영향 고려)
+  {
+    title:"새로운 목표가 생겼을 때 나는",
+    choices:[
+      {text:"A. 해보면서 방향을 찾음", type:"hustler"},
+      {text:"B. 먼저 계획을 세우고 움직임", type:"strategist"}
+    ]
+  }
+];
+
+let idx=0;
+let scores={obsessive:0,visionary:0,hustler:0,strategist:0,connector:0};
+let history=[];
+
+const screen=document.getElementById("screen");
+const bar=document.getElementById("bar");
+const count=document.getElementById("count");
+const backBtn=document.getElementById("backBtn");
+
+/* 시작 화면 */
+function intro(){
+  idx=0;
+  scores={obsessive:0,visionary:0,hustler:0,strategist:0,connector:0};
+  history=[];
+  bar.style.width="0%";
+  count.textContent=`0/${questions.length}`;
+
+  screen.innerHTML=`
+    <div class="logo">STARTUP TEST</div>
+    <div class="q-no">시작해볼까요?</div>
+    <div class="q-title">학교 생활 속 선택 10개로<br>나의 성향을 체크해보는 테스트예요</div>
+    <small style="text-align:center;color:var(--muted)">선택하면 바로 다음 문항으로 넘어가요</small>
+    <div class="choices">
+      <button class="choice" onclick="start()">바로 시작할게요</button>
+    </div>
+  `;
+}
+
+/* 문항 시작 */
+function start(){
+  idx=0;
+  history=[];
+  renderQuestion();
+  updateProgress();
+}
+
+function renderQuestion(){
+  const q=questions[idx];
+  screen.innerHTML=`
+    <div class="logo">SPARTA STYLE</div>
+    <div class="q-no">Q${idx+1}</div>
+    <div class="q-title">${q.title}</div>
+    <div class="q-step">${idx+1} / ${questions.length}</div>
+
+    <div class="choices">
+      ${q.choices.map(c=>`
+        <button class="choice" onclick="pick('${c.type}')">
+          ${c.text}
+        </button>`).join("")}
+    </div>
+
+    <div class="nav">
+      <button class="btn" onclick="back()" ${history.length===0?"disabled":""}>이전</button>
+      <button class="btn primary" onclick="intro()">처음으로</button>
+    </div>
+  `;
+}
+
+function pick(type){
+  scores[type]++;
+  history.push({idx,type});
+  idx++;
+  if(idx>=questions.length) showResult();
+  else { renderQuestion(); updateProgress(); }
+}
+
+/* 뒤로가기 */
+function back(){
+  if(history.length===0) return;
+  const last=history.pop();
+  scores[last.type]--;
+  idx=last.idx;
+  renderQuestion();
+  updateProgress();
+}
+
+/* 진행률 */
+function updateProgress(){
+  const total=questions.length;
+  bar.style.width=(idx/total)*100+"%";
+  count.textContent=`${idx}/${total}`;
+  backBtn.disabled=history.length===0;
+}
+
+/* 결과 계산 */
+function getWinner(){
+  const entries=Object.entries(scores);
+  const max=Math.max(...entries.map(e=>e[1]));
+  const winners=entries.filter(e=>e[1]===max).map(e=>e[0]);
+  if(winners.length===1) return winners[0];
+  for(let i=history.length-1;i>=0;i--){
+    if(winners.includes(history[i].type)) return history[i].type;
+  }
+  return winners[0];
+}
+
+/* 결과 화면 */
+function showResult(){
+  bar.style.width="100%";
+  count.textContent=`${questions.length}/${questions.length}`;
+
+  const key=getWinner();
+  const t=TYPES[key];
+
+  const meter=Object.keys(TYPES).map(k=>{
+    return `
+      <div class="meter-row">
+        <div>${TYPES[k].emoji} ${TYPES[k].en}</div>
+        <div class="meter-bar"><div class="meter-fill" style="width:${(scores[k]/questions.length)*100}%"></div></div>
+        <div>${scores[k]}</div>
+      </div>`;
+  }).join("");
+
+  screen.innerHTML=`
+    <div class="logo">RESULT</div>
+    <div class="result-emoji">${t.emoji}</div>
+    <div class="result-title">${t.en}<br>${t.name}</div>
+    <div class="result-one">${t.one}</div>
+
+    <div class="result-box">
+      ${t.desc.map(d=>`<div>- ${d}</div>`).join("")}
+    </div>
+
+    <div class="meter">${meter}</div>
+
+    <div class="choices" style="margin-top:10px;">
+      <button class="btn primary" onclick="start()">다시 해볼까요?</button>
+    </div>
+  `;
+}
+
+backBtn.addEventListener("click",back);
+intro();
+</script>
+
+</body>
+</html>
