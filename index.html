@@ -254,35 +254,35 @@ const TYPES = {
 /* 재배치된 10문항 */
 const questions = [
   {
-    title:"오늘은 축제 준비 날! 학교 가기 전, 배가 고프다면 나는?",
+    title:"오늘은 축제 준비 날! <br>학교 가기 전, 배가 고프다면 나는?",
     choices:[
       {text:"A. 한 끼쯤은 괜찮지, 빨리 가서 준비부터 시작함", type:"hustler"},
       {text:"B. 든든하게 먹고 하루를 차분히 준비함", type:"obsessive"}
     ]
   },
   {
-    title:"학교 도착! 매점에 신상 메뉴가 나왔다면, 나는?",
+    title:"학교 도착! <br> 매점에 신상 메뉴가 나왔다면, 나는?",
     choices:[
       {text:"A. 고민 없이 바로 사서 신상부터 먹어봄", type:"visionary"},
       {text:"B. 늘 먹던 메뉴로 안정적으로 감", type:"strategist"}
     ]
   },
   {
-    title:"운동장에 여러 체험 활동이 열렸다! 첫 활동을 고른다면?",
+    title:"운동장에 여러 체험 활동이 열렸다!<br> 첫 활동을 고른다면?",
     choices:[
       {text:"A. 재밌어 보이는 곳부터 가서 바로 체험함", type:"hustler"},
       {text:"B. 어떤 활동이 있는지 잠깐 둘러보고 선택함", type:"strategist"}
     ]
   },
   {
-    title:"이제 본격적으로 축제 부스 준비를 시작하려 한다! 나는?",
+    title:"이제 본격적으로.. <br> 축제 부스 준비를 시작하려 한다! 나는?",
     choices:[
       {text:"A. 팀원이랑 같이 의견 나누며 진행하는 게 편함", type:"connector"},
       {text:"B. 혼자 맡아 하는 게 오히려 더 효율적임", type:"obsessive"}
     ]
   },
   {
-    title:"단톡에 축제 공지가 폭발했다! 내 답장 스타일은?",
+    title:"단톡에 축제 공지가 폭발했다! <br> 내 답장 스타일은?",
     choices:[
       {text:"A. 보자마자 바로 답장함", type:"connector"},
       {text:"B. 필요한 것만 정리해서 나중에 답함", type:"strategist"}
@@ -296,7 +296,7 @@ const questions = [
     ]
   },
   {
-    title:"축제 운영 계획서 제출까지 남은 시간은 3시간! 나는?",
+    title:"축제 운영 계획서 제출까지,, <br> 남은 시간은 3시간! 나는?",
     choices:[
       {text:"A. 일단 시작하고 하면서 방향 잡음", type:"hustler"},
       {text:"B. 일정과 구조부터 짜고 차근차근 작성함", type:"strategist"}
@@ -305,12 +305,12 @@ const questions = [
   {
     title:"축제 준비 회의에서, 내 역할은?",
     choices:[
-      {text:"A. 모두의 의견을 듣고 조율하는 분위기 메이커", type:"connector"},
+      {text:"A. 의견을 듣고 조율하는 분위기 메이커", type:"connector"},
       {text:"B. 새로운 방향을 먼저 제안해 회의를 이끄는 리더", type:"visionary"}
     ]
   },
   {
-    title:"축제 끝! 이제 현실 복귀,,, 시험 준비하는 나의 공부 스타일은?",
+    title:"축제 끝! 이제 현실 복귀,,, <br>시험 준비하는 나의 공부 스타일은?",
     choices:[
       {text:"A. 혼자 조용히 집중해서 공부하는 편", type:"obsessive"},
       {text:"B. 친구들이랑 같이 문제 풀며 공부하는 편", type:"connector"}
@@ -351,7 +351,7 @@ function intro(){
   screen.innerHTML=`
     <div class="logo">STARTUP TEST</div>
     <div class="q-no">시작해볼까요?</div>
-    <div class="q-title">오늘은 축제 준비 날!<br>아침 준비부터 팀 프로젝트, 회의, 목표 도전까지<br>학교 생활 속 다양한 순간에서 나의 선택을 해보세요.<br>작은 선택들이 모여
+    <div class="q-title">오늘은 축제 준비 날!<br>아침 준비부터 팀 프로젝트, 회의, 목표 도전까지 학교 생활 속 다양한 순간에서<br> 나의 선택을 해보세요.<br>작은 선택들이 모여
 내가 어떤 창업가 유형인지 알려줍니다.</div>
     <small style="text-align:center;color:var(--muted)">선택하면 바로 다음 문항으로 넘어가요</small>
     <div class="choices">
@@ -468,6 +468,7 @@ intro();
 
 </body>
 </html>
+
 
 
 
