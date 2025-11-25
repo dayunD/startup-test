@@ -254,76 +254,77 @@ const TYPES = {
 /* 재배치된 10문항 */
 const questions = [
   {
-    title:"아침에 학교 도착했는데 배가 고픔. 선택한다면?",
+    title:"학교 가기 전 배가 고픔. 선택한다면?",
     choices:[
-      {text:"A. 라면으로 바로 해결함", type:"hustler"},
-      {text:"B. 밥으로 든든하게 먹고 시작함", type:"obsessive"}
+      {text:"A. 한 끼쯤은 괜찮지, 그냥 패스함", type:"hustler"},
+      {text:"B. 든든하게 먹고 하루 시작함", type:"obsessive"}
     ]
   },
   {
-    title:"신상 과자가 나왔다면 나는",
+    title:"학교 매점에 신상 메뉴가 나왔다면 나는",
     choices:[
-      {text:"A. 일단 사서 먹어봄", type:"visionary"},
-      {text:"B. 익숙한 과자를 선택함", type:"strategist"}
+      {text:"A. 고민 없이 바로 사서 먹어봄", type:"visionary"},
+      {text:"B. 늘 먹던 메뉴로 안정 선택함", type:"strategist"}
     ]
   },
   {
-    title:"놀이공원에서 첫 코스 선택",
+    title:"체육대회나 학교 행사 날. 첫 순서라면?",
     choices:[
-      {text:"A. 롤러코스터 타고 시작함", type:"hustler"},
-      {text:"B. 관람차에서 천천히 시작함", type:"strategist"}
+      {text:"A. 바로 달리기나 게임부터 뛰어듦", type:"hustler"},
+      {text:"B. 준비운동이나 응원부터 천천히 감", type:"strategist"}
     ]
   },
   {
-    title:"팀 프로젝트 시작할 때",
+    title:"팀 프로젝트 시작할 때 나는",
     choices:[
-      {text:"A. 같이 하는 게 편함", type:"connector"},
-      {text:"B. 혼자 하는 게 더 편함", type:"obsessive"}
+      {text:"A. 같이 하는 게 더 편함", type:"connector"},
+      {text:"B. 혼자가 더 편함", type:"obsessive"}
     ]
   },
   {
-    title:"단톡 메시지 답장 스타일",
+    title:"단톡 메시지 답장 스타일은?",
     choices:[
-      {text:"A. 바로 답장함", type:"connector"},
+      {text:"A. 보이면 바로 답장함", type:"connector"},
       {text:"B. 내 템포대로 나중에 답함", type:"strategist"}
     ]
   },
   {
-    title:"새 프로젝트 아이디어가 생겼을 때",
+    title:"새 활동 아이디어가 떠올랐을 때",
     choices:[
-      {text:"A. 떠오른 대로 바로 이야기함", type:"visionary"},
-      {text:"B. 먼저 혼자 정리해본 뒤 이야기함", type:"obsessive"}
+      {text:"A. 떠오르자마자 바로 말해봄", type:"visionary"},
+      {text:"B. 혼자 정리해본 뒤 말함", type:"obsessive"}
     ]
   },
   {
     title:"과제 마감이 다가왔을 때 나는",
     choices:[
       {text:"A. 일단 시작하고 하면서 채워감", type:"hustler"},
-      {text:"B. 계획부터 짜고 단계별로 진행함", type:"strategist"}
+      {text:"B. 계획부터 세우고 단계별로 진행함", type:"strategist"}
     ]
   },
   {
     title:"모둠 활동 첫 회의에서 나는",
     choices:[
-      {text:"A. 모두 의견 듣고 조율하려 함", type:"connector"},
+      {text:"A. 다들 의견 듣고 조율하려 함", type:"connector"},
       {text:"B. 새로운 방향을 먼저 제안함", type:"visionary"}
     ]
   },
   {
-    title:"시험 공부할 때 더 가까운 스타일은",
+    title:"시험 공부할 때 더 가까운 스타일은?",
     choices:[
-      {text:"A. 한 분야 깊게 파는 몰입형", type:"obsessive"},
-      {text:"B. 친구들이랑 문제 풀며 같이 공부함", type:"connector"}
+      {text:"A. 혼자 집중해서 깊게 파는 편임", type:"obsessive"},
+      {text:"B. 친구들이랑 같이 풀며 해가는 편임", type:"connector"}
     ]
   },
   {
     title:"새로운 목표가 생겼을 때 나는",
     choices:[
-      {text:"A. 해보면서 방향을 찾음", type:"hustler"},
-      {text:"B. 먼저 계획을 세우고 움직임", type:"strategist"}
+      {text:"A. 해보면서 방향을 찾는 편임", type:"hustler"},
+      {text:"B. 계획 세우고 움직이는 편임", type:"strategist"}
     ]
   }
 ];
+
 
 let idx = 0;
 let scores = {obsessive:0, visionary:0, hustler:0, strategist:0, connector:0};
@@ -465,3 +466,4 @@ intro();
 
 </body>
 </html>
+
