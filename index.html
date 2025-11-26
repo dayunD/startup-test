@@ -218,6 +218,18 @@
       .choice{ font-size:15px; padding:12px; }
       .q-title{ font-size:18px; }
     }
+
+        .result-image{
+      text-align:center;
+      margin:10px 0 6px;
+    }
+    .result-image img{
+      max-width:220px;
+      width:60%;
+      height:auto;
+      display:inline-block;
+    }
+
   </style>
 </head>
 
@@ -239,17 +251,63 @@
 <script>
 /* 유형 데이터 */
 const TYPES = {
-  obsessive:{name:"집요한 전문가형", emoji:"🔎", one:"포텐 무한 집중형",
-    desc:["한 번 목표를 정하면 끝까지 파고드는 편임","디테일과 완성도를 꼼꼼히 챙기는 편임","팀에서 핵심 기술이나 품질을 맡으면 강점 발휘"]},
-  visionary:{name:"미래를 그리는 리더형", emoji:"💡", one:"아이디어 반짝형",
-    desc:["큰 그림과 새로운 콘셉트를 잘 떠올리는 편임","새로운 방향을 제안하는 편임","팀의 비전과 흐름을 잡을 때 강점 발휘"]},
-  hustler:{name:"행동하는 실천가형", emoji:"🔥", one:"실행력 든든형",
-    desc:["생각보다 행동이 먼저 나오는 편임","부딪히며 배우는 스타일임","팀의 실행력을 끌어올리는 역할"]},
-  strategist:{name:"데이터 중심 전략가형", emoji:"📊", one:"전략 똑똑형",
-    desc:["계획적으로 움직이는 편임","근거와 데이터를 챙기는 스타일","운영 로드맵을 맡으면 안정적임"]},
-  connector:{name:"네트워크형 조정자", emoji:"🤝", one:"소통 따뜻형",
-    desc:["사람들과 쉽게 어울리고 분위기 잘 맞춤","협업 조율을 잘함","팀의 중심을 잡아주는 역할"]}
+  obsessive:{
+    name:"집요한 전문가형",
+    emoji:"🔎",
+    one:"포텐 무한 집중형",
+    img:"img/detail-obsessive.png",      // ⬅ 디테일 집착러 이미지
+    desc:[
+      "한 번 목표를 정하면 끝까지 파고드는 편임",
+      "디테일과 완성도를 꼼꼼히 챙기는 편임",
+      "팀에서 핵심 기술이나 품질을 맡으면 강점 발휘"
+    ]
+  },
+  visionary:{
+    name:"미래를 그리는 리더형",
+    emoji:"💡",
+    one:"아이디어 반짝형",
+    img:"img/idea-visionary.png",        // ⬅ 아이디어 폭발러 이미지
+    desc:[
+      "큰 그림과 새로운 콘셉트를 잘 떠올리는 편임",
+      "새로운 방향을 제안하는 편임",
+      "팀의 비전과 흐름을 잡을 때 강점 발휘"
+    ]
+  },
+  hustler:{
+    name:"행동하는 실천가형",
+    emoji:"🔥",
+    one:"실행력 든든형",
+    img:"img/action-hustler.png",        // ⬅ 행동력 만렙러(호랑이) 이미지
+    desc:[
+      "생각보다 행동이 먼저 나오는 편임",
+      "부딪히며 배우는 스타일임",
+      "팀의 실행력을 끌어올리는 역할"
+    ]
+  },
+  strategist:{
+    name:"데이터 중심 전략가형",
+    emoji:"📊",
+    one:"전략 똑똑형",
+    img:"img/plan-strategist.png",       // ⬅ 계획 장인러(하마) 이미지
+    desc:[
+      "계획적으로 움직이는 편임",
+      "근거와 데이터를 챙기는 스타일",
+      "운영 로드맵을 맡으면 안정적임"
+    ]
+  },
+  connector:{
+    name:"네트워크형 조정자",
+    emoji:"🤝",
+    one:"소통 따뜻형",
+    img:"img/mood-connector.png",        // ⬅ 분위기 메이커(펭귄) 이미지
+    desc:[
+      "사람들과 쉽게 어울리고 분위기 잘 맞춤",
+      "협업 조율을 잘함",
+      "팀의 중심을 잡아주는 역할"
+    ]
+  }
 };
+
 
 /* 재배치된 10문항 */
 const questions = [
@@ -456,6 +514,11 @@ function showResult(){
 
   screen.innerHTML=`
     <div class="logo">RESULT</div>
+
+    <div class="result-image">
+      <img src="${t.img}" alt="${t.name}">
+    </div>
+
     <div class="result-emoji">${t.emoji}</div>
     <div class="result-title">${t.name}</div>
     <div class="result-one">${t.one}</div>
@@ -472,6 +535,7 @@ function showResult(){
   `;
 }
 
+
 backBtn.addEventListener("click", back);
 intro();
 </script>
@@ -479,6 +543,7 @@ intro();
 
 </body>
 </html>
+
 
 
 
