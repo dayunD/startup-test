@@ -178,9 +178,49 @@
       border:none;
     }
 
-    .result-emoji{ font-size:56px; text-align:center; }
-    .result-title{ text-align:center; font-size:22px; font-weight:900; }
-    .result-one{ text-align:center; font-size:14px; font-weight:900; color:var(--sky-600); }
+    /* ===== 결과 영역 레이아웃 ===== */
+    .result-head{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      margin-top:4px;
+      margin-bottom:12px;
+    }
+
+    .result-emoji{
+      font-size:40px;
+      text-align:center;
+    }
+
+    .result-text{
+      display:grid;
+      gap:4px;
+      text-align:left;
+    }
+
+    .result-title{
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .result-one{
+      font-size:14px;
+      font-weight:900;
+      color:var(--sky-600);
+    }
+
+    .result-image{
+      text-align:center;
+      margin:4px 0 12px;
+    }
+    .result-image img{
+      max-width:260px;
+      width:70%;
+      height:auto;
+      display:inline-block;
+      border-radius:16px;
+    }
 
     .result-box{
       background:var(--sky-50);
@@ -217,19 +257,14 @@
       .card{ padding:16px; min-height:calc(100dvh - 100px); }
       .choice{ font-size:15px; padding:12px; }
       .q-title{ font-size:18px; }
-    }
 
-        .result-image{
-      text-align:center;
-      margin:10px 0 6px;
+      .result-head{
+        flex-direction:column;
+      }
+      .result-text{
+        text-align:center;
+      }
     }
-    .result-image img{
-      max-width:220px;
-      width:60%;
-      height:auto;
-      display:inline-block;
-    }
-
   </style>
 </head>
 
@@ -255,7 +290,7 @@ const TYPES = {
     name:"집요한 전문가형",
     emoji:"🔎",
     one:"포텐 무한 집중형",
-    img:"img/detail-obsessive.png",      // ⬅ 디테일 집착러 이미지
+    img:"imgdetail-obsessive.png",
     desc:[
       "한 번 목표를 정하면 끝까지 파고드는 편임",
       "디테일과 완성도를 꼼꼼히 챙기는 편임",
@@ -266,7 +301,7 @@ const TYPES = {
     name:"미래를 그리는 리더형",
     emoji:"💡",
     one:"아이디어 반짝형",
-    img:"img/idea-visionary.png",        // ⬅ 아이디어 폭발러 이미지
+    img:"imgidea-visionary.png",
     desc:[
       "큰 그림과 새로운 콘셉트를 잘 떠올리는 편임",
       "새로운 방향을 제안하는 편임",
@@ -277,7 +312,7 @@ const TYPES = {
     name:"행동하는 실천가형",
     emoji:"🔥",
     one:"실행력 든든형",
-    img:"img/action-hustler.png",        // ⬅ 행동력 만렙러(호랑이) 이미지
+    img:"imgaction-hustler.png",
     desc:[
       "생각보다 행동이 먼저 나오는 편임",
       "부딪히며 배우는 스타일임",
@@ -288,7 +323,7 @@ const TYPES = {
     name:"데이터 중심 전략가형",
     emoji:"📊",
     one:"전략 똑똑형",
-    img:"img/plan-strategist.png",       // ⬅ 계획 장인러(하마) 이미지
+    img:"imgplan-strategist.png",
     desc:[
       "계획적으로 움직이는 편임",
       "근거와 데이터를 챙기는 스타일",
@@ -299,7 +334,7 @@ const TYPES = {
     name:"네트워크형 조정자",
     emoji:"🤝",
     one:"소통 따뜻형",
-    img:"img/mood-connector.png",        // ⬅ 분위기 메이커(펭귄) 이미지
+    img:"imgmood-connector.png",
     desc:[
       "사람들과 쉽게 어울리고 분위기 잘 맞춤",
       "협업 조율을 잘함",
@@ -307,7 +342,6 @@ const TYPES = {
     ]
   }
 };
-
 
 /* 재배치된 10문항 */
 const questions = [
@@ -388,7 +422,7 @@ let scores = {obsessive:0, visionary:0, hustler:0, strategist:0, connector:0};
 let history = [];
 
 const screen = document.getElementById("screen");
-const bar = document.getElementById("bar");
+const bar   = document.getElementById("bar");
 const count = document.getElementById("count");
 const backBtn = document.getElementById("backBtn");
 
@@ -515,13 +549,17 @@ function showResult(){
   screen.innerHTML=`
     <div class="logo">RESULT</div>
 
+    <div class="result-head">
+      <div class="result-emoji">${t.emoji}</div>
+      <div class="result-text">
+        <div class="result-title">${t.name}</div>
+        <div class="result-one">${t.one}</div>
+      </div>
+    </div>
+
     <div class="result-image">
       <img src="${t.img}" alt="${t.name}">
     </div>
-
-    <div class="result-emoji">${t.emoji}</div>
-    <div class="result-title">${t.name}</div>
-    <div class="result-one">${t.one}</div>
 
     <div class="result-box">
       ${t.desc.map(d=>`<div>- ${d}</div>`).join("")}
@@ -535,30 +573,9 @@ function showResult(){
   `;
 }
 
-
 backBtn.addEventListener("click", back);
 intro();
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
