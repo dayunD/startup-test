@@ -239,17 +239,18 @@
 <script>
 /* 유형 데이터 */
 const TYPES = {
-  obsessive:{name:"집요한 전문가형", emoji:"🔎",one:"포텐 무한 집중형",
+  obsessive:{name:"집요한 전문가형", emoji:"🔎", one:"포텐 무한 집중형",
     desc:["한 번 목표를 정하면 끝까지 파고드는 편임","디테일과 완성도를 꼼꼼히 챙기는 편임","팀에서 핵심 기술이나 품질을 맡으면 강점 발휘"]},
-  visionary:{name:"미래를 그리는 리더형", emoji:"💡",one:"아이디어 반짝형",
+  visionary:{name:"미래를 그리는 리더형", emoji:"💡", one:"아이디어 반짝형",
     desc:["큰 그림과 새로운 콘셉트를 잘 떠올리는 편임","새로운 방향을 제안하는 편임","팀의 비전과 흐름을 잡을 때 강점 발휘"]},
-  hustler:{name:"행동하는 실천가형", emoji:"🔥",one:"실행력 든든형",
+  hustler:{name:"행동하는 실천가형", emoji:"🔥", one:"실행력 든든형",
     desc:["생각보다 행동이 먼저 나오는 편임","부딪히며 배우는 스타일임","팀의 실행력을 끌어올리는 역할"]},
-  strategist:{name:"데이터 중심 전략가형", emoji:"📊",one:"전략 똑똑형",
+  strategist:{name:"데이터 중심 전략가형", emoji:"📊", one:"전략 똑똑형",
     desc:["계획적으로 움직이는 편임","근거와 데이터를 챙기는 스타일","운영 로드맵을 맡으면 안정적임"]},
-  connector:{name:"네트워크형 조정자", emoji:"🤝",one:"소통 따뜻형",
+  connector:{name:"네트워크형 조정자", emoji:"🤝", one:"소통 따뜻형",
     desc:["사람들과 쉽게 어울리고 분위기 잘 맞춤","협업 조율을 잘함","팀의 중심을 잡아주는 역할"]}
 };
+
 
 /* 재배치된 10문항 */
 const questions = [
@@ -370,24 +371,22 @@ function start(){
 function renderQuestion(){
   const q = questions[idx];
   screen.innerHTML=`
-    <div class="logo">SPARTA STYLE</div>
-    <div class="q-no">Q${idx+1}</div>
-    <div class="q-title">${q.title}</div>
-    <div class="q-step">${idx+1} / ${questions.length}</div>
-
-    <div class="choices">
-      ${q.choices.map(c=>`
-        <button class="choice" onclick="pick('${c.type}')">
-          ${c.text}
-        </button>`).join("")}
+    <div class="logo">RESULT</div>
+    <div class="result-emoji">${t.emoji}</div>
+    <div class="result-title">${t.name}</div>
+    <div class="result-one">${t.one}</div>
+  
+    <div class="result-box">
+      ${t.desc.map(d=>`<div>- ${d}</div>`).join("")}
     </div>
-
-    <div class="nav">
-      <button class="btn" onclick="back()" ${history.length===0?"disabled":""}>이전</button>
-      <button class="btn primary" onclick="intro()">처음으로</button>
+  
+    <div class="meter">${meter}</div>
+  
+    <div class="choices" style="margin-top:10px;">
+      <button class="btn primary" onclick="start()">다시 해볼까요?</button>
     </div>
   `;
-}
+
 
 function pick(type){
   scores[type]++;
@@ -435,14 +434,15 @@ function showResult(){
   const key=getWinner();
   const t=TYPES[key];
 
-  const meter=Object.keys(TYPES).map(k=>{
+  const meter = Object.keys(TYPES).map(k=>{
     return `
       <div class="meter-row">
-        <div>${TYPES[k].emoji} ${TYPES[k].en}</div>
+        <div>${TYPES[k].emoji} ${TYPES[k].name}</div>
         <div class="meter-bar"><div class="meter-fill" style="width:${(scores[k]/questions.length)*100}%"></div></div>
         <div>${scores[k]}</div>
       </div>`;
   }).join("");
+
 
   screen.innerHTML=`
     <div class="logo">RESULT</div>
@@ -468,6 +468,7 @@ intro();
 
 </body>
 </html>
+
 
 
 
