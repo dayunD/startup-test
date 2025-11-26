@@ -251,7 +251,6 @@ const TYPES = {
     desc:["사람들과 쉽게 어울리고 분위기 잘 맞춤","협업 조율을 잘함","팀의 중심을 잡아주는 역할"]}
 };
 
-
 /* 재배치된 10문항 */
 const questions = [
   {
@@ -326,8 +325,6 @@ const questions = [
   }
 ];
 
-
-
 let idx = 0;
 let scores = {obsessive:0, visionary:0, hustler:0, strategist:0, connector:0};
 let history = [];
@@ -352,8 +349,12 @@ function intro(){
   screen.innerHTML=`
     <div class="logo">STARTUP TEST</div>
     <div class="q-no">시작해볼까요?</div>
-    <div class="q-title">오늘은 축제 준비 날!<br>아침 준비부터 팀 프로젝트, 회의, 목표 도전까지 학교 생활 속 다양한 순간에서<br> 나의 선택을 해보세요.<br>작은 선택들이 모여
-내가 어떤 창업가 유형인지 알려줍니다.</div>
+    <div class="q-title">
+      오늘은 축제 준비 날!<br>
+      아침 준비부터 팀 프로젝트, 회의, 목표 도전까지 학교 생활 속 다양한 순간에서<br>
+      나의 선택을 해보세요.<br>
+      작은 선택들이 모여 내가 어떤 창업가 유형인지 알려줍니다.
+    </div>
     <small style="text-align:center;color:var(--muted)">선택하면 바로 다음 문항으로 넘어가요</small>
     <div class="choices">
       <button class="choice" onclick="start()">바로 시작할게요</button>
@@ -363,62 +364,70 @@ function intro(){
 
 /* 문항 시작 */
 function start(){
-  resetAll();            // ✅ 여기서도 완전 초기화
+  resetAll();
   renderQuestion();
   updateProgress();
 }
 
+/* 문항 화면 그리기 */
 function renderQuestion(){
   const q = questions[idx];
   screen.innerHTML=`
-    <div class="logo">RESULT</div>
-    <div class="result-emoji">${t.emoji}</div>
-    <div class="result-title">${t.name}</div>
-    <div class="result-one">${t.one}</div>
-  
-    <div class="result-box">
-      ${t.desc.map(d=>`<div>- ${d}</div>`).join("")}
+    <div class="logo">SPARTA STYLE</div>
+    <div class="q-no">Q${idx+1}</div>
+    <div class="q-title">${q.title}</div>
+    <div class="q-step">${idx+1} / ${questions.length}</div>
+
+    <div class="choices">
+      ${q.choices.map(c=>`
+        <button class="choice" onclick="pick('${c.type}')">
+          ${c.text}
+        </button>
+      `).join("")}
     </div>
-  
-    <div class="meter">${meter}</div>
-  
-    <div class="choices" style="margin-top:10px;">
-      <button class="btn primary" onclick="start()">다시 해볼까요?</button>
+
+    <div class="nav">
+      <button class="btn" onclick="back()" ${history.length===0 ? "disabled" : ""}>이전</button>
+      <button class="btn primary" onclick="intro()">처음으로</button>
     </div>
   `;
+}
 
-
+/* 선택 처리 */
 function pick(type){
   scores[type]++;
   history.push({idx,type});
   idx++;
   if(idx>=questions.length) showResult();
-  else { renderQuestion(); updateProgress(); }
+  else{
+    renderQuestion();
+    updateProgress();
+  }
 }
 
 /* 뒤로가기 */
 function back(){
   if(history.length===0) return;
-  const last=history.pop();
+  const last = history.pop();
   scores[last.type]--;
-  idx=last.idx;
+  idx = last.idx;
   renderQuestion();
   updateProgress();
 }
 
 /* 진행률 */
 function updateProgress(){
-  const total=questions.length;
-  bar.style.width=(idx/total)*100+"%";
-  count.textContent=`${idx}/${total}`;
-  backBtn.disabled=history.length===0;
+  const total = questions.length;
+  bar.style.width = (idx/total)*100 + "%";
+  count.textContent = `${idx}/${total}`;
+  backBtn.disabled = history.length===0;
 }
 
 /* 결과 계산 */
 function getWinner(){
-  const entries=Object.entries(scores);
-  const max=Math.max(...entries.map(e=>e[1]));
-  const winners=entries.filter(e=>e[1]===max).map(e=>e[0]);
+  const entries = Object.entries(scores);
+  const max = Math.max(...entries.map(e=>e[1]));
+  const winners = entries.filter(e=>e[1]===max).map(e=>e[0]);
   if(winners.length===1) return winners[0];
   for(let i=history.length-1;i>=0;i--){
     if(winners.includes(history[i].type)) return history[i].type;
@@ -428,26 +437,27 @@ function getWinner(){
 
 /* 결과 화면 */
 function showResult(){
-  bar.style.width="100%";
-  count.textContent=`${questions.length}/${questions.length}`;
+  bar.style.width = "100%";
+  count.textContent = `${questions.length}/${questions.length}`;
 
-  const key=getWinner();
-  const t=TYPES[key];
+  const key = getWinner();
+  const t = TYPES[key];
 
   const meter = Object.keys(TYPES).map(k=>{
     return `
       <div class="meter-row">
         <div>${TYPES[k].emoji} ${TYPES[k].name}</div>
-        <div class="meter-bar"><div class="meter-fill" style="width:${(scores[k]/questions.length)*100}%"></div></div>
+        <div class="meter-bar">
+          <div class="meter-fill" style="width:${(scores[k]/questions.length)*100}%"></div>
+        </div>
         <div>${scores[k]}</div>
       </div>`;
   }).join("");
 
-
   screen.innerHTML=`
     <div class="logo">RESULT</div>
     <div class="result-emoji">${t.emoji}</div>
-    <div class="result-title">${t.en}<br>${t.name}</div>
+    <div class="result-title">${t.name}</div>
     <div class="result-one">${t.one}</div>
 
     <div class="result-box">
@@ -462,12 +472,14 @@ function showResult(){
   `;
 }
 
-backBtn.addEventListener("click",back);
+backBtn.addEventListener("click", back);
 intro();
 </script>
 
+
 </body>
 </html>
+
 
 
 
